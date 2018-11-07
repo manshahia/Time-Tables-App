@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -27,6 +27,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print("slider ", Int(slider.value))
         table.reloadData()
     }
+    
+    //Hide keyboard if user touches outside of textfield
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textfield.resignFirstResponder()
+        return true
+    }
+    
+    
+    
     
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
