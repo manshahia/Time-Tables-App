@@ -9,6 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var textfield: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBAction func saveButtonPressed(_ sender: Any) {
+        
+        if let number = textfield.text
+        {
+            UserDefaults.standard.set(number, forKey: "number")
+        }
+        
+    }
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var slider: UISlider!
@@ -30,7 +41,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let numberObject = UserDefaults.standard.object(forKey: "number")
+        if let number = numberObject as? String {
+            label.text = "Your Number is"
+            textfield.text = number
+            
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
